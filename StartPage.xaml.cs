@@ -34,7 +34,7 @@ namespace Cee_lo
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(InformationPage));
         }
 
         private void TitleText_SelectionChanged(object sender, RoutedEventArgs e)
