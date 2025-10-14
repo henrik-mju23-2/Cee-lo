@@ -19,7 +19,7 @@
         <Rectangle x:Name="Rectangle2_Copy3" HorizontalAlignment="Center" Height="41" Stroke="Black" VerticalAlignment="Top" Width="148" Fill="#FF0062FF" StrokeThickness="0" Margin="0,381,0,0"/>
         <TextBlock x:Name="ResultatTextBlock" HorizontalAlignment="Center" Margin="0,430,0,0" TextWrapping="Wrap" Text="Spelare 1 vann!" VerticalAlignment="Top" Foreground="Black" FontSize="36" SelectionChanged="ResultatTextBlock_SelectionChanged"/>
         <TextBlock x:Name="BankTextBlock" HorizontalAlignment="Left" Margin="456,490,0,0" TextWrapping="Wrap" Text="Bank: 0 Poäng" VerticalAlignment="Top" Foreground="Black" FontSize="24"/>
-        <TextBlock x:Name="SpelareTextBlock" HorizontalAlignment="Left" Margin="640,490,0,0" TextWrapping="Wrap" Text="Spelare 1: 0 Poäng" VerticalAlignment="Top" Foreground="Black" FontSize="24"/>
+        <TextBlock x:Name="PlayerTextBlock" HorizontalAlignment="Left" Margin="640,490,0,0" TextWrapping="Wrap" Text="Spelare 1: 0 Poäng" VerticalAlignment="Top" Foreground="Black" FontSize="24"/>
 
     </Grid>
 </Page>

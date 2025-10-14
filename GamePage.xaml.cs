@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,8 +21,8 @@ namespace Cee_lo
     public sealed partial class GamePage : Page
     {
         private Random random = new Random();
-        private int BankPoints = 0;
-        private int PlayerPoints = 0;
+        public int BankPoints = 0;
+        public int PlayerPoints = 0;
         private int? bankPairValue = null; // for comparing with player later
 
         public GamePage()
@@ -163,6 +164,9 @@ namespace Cee_lo
             int[] dice = RollDice();
             UpdateDiceButtons(dice, DieSlot1, DieSlot2, DieSlot3);
             await EvaluatePlayerRollAsync(dice);
+
+            Trace.WriteLine($"BankPoints: {BankPoints}");
+            Trace.WriteLine($"PlayerPoints: {PlayerPoints}");
         }
 
         private async Task EvaluatePlayerRollAsync(int[] dice)
@@ -256,8 +260,9 @@ namespace Cee_lo
 
         private void EndButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ResultPage));
+            Frame.Navigate(typeof(ResultPage), new int[] { BankPoints, PlayerPoints });
         }
+
 
         private void BankPointsTextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {

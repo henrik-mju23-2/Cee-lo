@@ -133,7 +133,7 @@
         </Popup>
         <TextBlock x:Name="PlayerPointsTextBlock" HorizontalAlignment="Left" Margin="357,498,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" SelectionChanged="PlayerPointsTextBlock_SelectionChanged_1" FontSize="22" Text="Poäng: 0"/>
         <Button x:Name="EndButton" Content="Avsluta" Margin="586,564,0,0" VerticalAlignment="Top" Width="175" Height="75" Background="#FF0062FF" CornerRadius="15,15,15,15" BorderBrush="Black" BorderThickness="1,1,1,1" FontSize="36" Click="EndButton_Click" Grid.Column="1"/>
-        <TextBlock x:Name="InfoTextBlock1" HorizontalAlignment="Left" Margin="408,0,0,0" TextWrapping="Wrap" Text="Bank rullar först" VerticalAlignment="Center" Foreground="Red" FontSize="72" Grid.ColumnSpan="2" SelectionChanged="InfoTextBlock_SelectionChanged"/>
+        <TextBlock x:Name="InfoTextBlock1" HorizontalAlignment="Left" Margin="233,0,0,0" TextWrapping="Wrap" Text="Bank rullar först" VerticalAlignment="Center" Foreground="Red" FontSize="72" Grid.ColumnSpan="2" SelectionChanged="InfoTextBlock_SelectionChanged"/>
         <TextBlock x:Name="BankPointsTextBlock" HorizontalAlignment="Left" Margin="357,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Foreground="Black" Text="Poäng: 0" SelectionChanged="BankPointsTextBlock_SelectionChanged"/>
         <Button x:Name="BankDieSlot2" Grid.Column="1" Content="" Margin="91,128,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="BankDieSlot2_Click">
             <Button.Background>

@@ -28,6 +28,32 @@ namespace Cee_lo
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.Parameter is int[] scores && scores.Length == 2)
+            {
+                int bankPoints = scores[0];
+                int playerPoints = scores[1];
+                BankTextBlock.Text = $"Bank Poäng: {bankPoints}";
+                PlayerTextBlock.Text = $"Spelare 1 Poäng: {playerPoints}";
+
+                if (bankPoints > playerPoints) 
+                {
+                    ResultatTextBlock.Text = "Banken vann!";
+                }
+                else if(playerPoints > bankPoints)
+                {
+                    ResultatTextBlock.Text = "Spelare 1 vann!";
+                }
+                else
+                {
+                    ResultatTextBlock.Text = "Oavgjort.";
+                }
+            }
+        }
+
+
         private void ResultatPageBackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(StartPage));
