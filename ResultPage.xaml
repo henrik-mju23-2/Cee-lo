@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="Cee_lo.ResultPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Cee_lo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Width="1280" Height="720" Background="#FFA3A3A3">
+        <TextBlock x:Name="ResultPageTitleText" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap" Text="Resultat" VerticalAlignment="Top" FontSize="96"/>
+        <Rectangle x:Name="Rectangle1" HorizontalAlignment="Center" Height="400" Stroke="Black" VerticalAlignment="Center" Width="400" Fill="White" RadiusX="15" RadiusY="15"/>
+        <Button x:Name="ResultatPageBackButton" Content="Tillbaka" Margin="0,590,0,0" VerticalAlignment="Top" Width="175" Height="75" Background="#FF0062FF" CornerRadius="15,15,15,15" BorderBrush="Black" BorderThickness="1,1,1,1" FontSize="48" HorizontalAlignment="Center" Click="ResultatPageBackButton_Click"/>
+        <Rectangle x:Name="Rectangle2" HorizontalAlignment="Center" Height="210" Stroke="Black" VerticalAlignment="Top" Width="210" Fill="#FFA3A3A3" RadiusX="15" RadiusY="15" Margin="0,215,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy" HorizontalAlignment="Center" Height="96" Stroke="Black" VerticalAlignment="Top" Width="96" Fill="#FF0062FF" RadiusX="360" RadiusY="360" Margin="0,236,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy1" HorizontalAlignment="Center" Height="71" Stroke="Black" VerticalAlignment="Top" Width="151" Fill="#FF0062FF" RadiusY="30" RadiusX="30" Margin="0,352,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy2" HorizontalAlignment="Center" Height="35" Stroke="Black" VerticalAlignment="Top" Width="151" Fill="#FF0062FF" Margin="0,388,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy3" HorizontalAlignment="Center" Height="41" Stroke="Black" VerticalAlignment="Top" Width="148" Fill="#FF0062FF" StrokeThickness="0" Margin="0,381,0,0"/>
+        <TextBlock x:Name="ResultatTextBlock" HorizontalAlignment="Center" Margin="0,430,0,0" TextWrapping="Wrap" Text="Spelare 1 vann!" VerticalAlignment="Top" Foreground="Black" FontSize="36" SelectionChanged="ResultatTextBlock_SelectionChanged"/>
+        <TextBlock x:Name="BankTextBlock" HorizontalAlignment="Left" Margin="456,490,0,0" TextWrapping="Wrap" Text="Bank: 0 Poäng" VerticalAlignment="Top" Foreground="Black" FontSize="24"/>
+        <TextBlock x:Name="SpelareTextBlock" HorizontalAlignment="Left" Margin="640,490,0,0" TextWrapping="Wrap" Text="Spelare 1: 0 Poäng" VerticalAlignment="Top" Foreground="Black" FontSize="24"/>
+
+    </Grid>
+</Page>
