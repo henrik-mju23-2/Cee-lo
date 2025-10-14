@@ -27,6 +27,24 @@ namespace Cee_lo
             this.InitializeComponent();
 
             BlurRectangle.Visibility = Visibility.Collapsed;
+
+            InfoTextBlock1.Visibility = Visibility.Collapsed;
+
+            DieButton.Opacity = 0.5;
+
+            DieButton.IsHitTestVisible = false;
+
+            DieSlot1.IsHitTestVisible = false;
+
+            DieSlot2.IsHitTestVisible = false;
+
+            DieSlot3.IsHitTestVisible = false;
+
+            BankDieSlot1.IsHitTestVisible = false;
+
+            BankDieSlot2.IsHitTestVisible = false;
+
+            BankDieSlot3.IsHitTestVisible = false;
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
@@ -66,14 +84,39 @@ namespace Cee_lo
 
         }
 
-        private void textBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
+        private void EndButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ResultPage));
+        }
+
+        private void InfoTextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void EndButton_Click(object sender, RoutedEventArgs e)
+        private void PlayerPointsTextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ResultPage));
+
+        }
+
+        private void BankPointsTextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BankDieSlot1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BankDieSlot2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BankDieSlot3_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

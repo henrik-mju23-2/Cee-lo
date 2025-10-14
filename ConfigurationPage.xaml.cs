@@ -27,6 +27,10 @@ namespace Cee_lo
         {
             this.InitializeComponent();
             BlurRectangle.Visibility = Visibility.Collapsed;
+
+            MedBankButton.IsHitTestVisible = false;
+
+            UtanBankButton.IsHitTestVisible = false;
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
