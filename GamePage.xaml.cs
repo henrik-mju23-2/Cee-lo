@@ -25,11 +25,14 @@ namespace Cee_lo
         public GamePage()
         {
             this.InitializeComponent();
+
+            BlurRectangle.Visibility = Visibility.Collapsed;
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            InformationPopUp.IsOpen = true;
+            BlurRectangle.Visibility = Visibility.Visible;
         }
 
         private void DieButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +57,8 @@ namespace Cee_lo
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            InformationPopUp.IsOpen = false;
+            BlurRectangle.Visibility = Visibility.Collapsed;
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -65,6 +69,11 @@ namespace Cee_lo
         private void textBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void EndButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ResultPage));
         }
     }
 }

@@ -41,7 +41,17 @@ namespace Cee_lo
             BlurRectangle.Visibility = Visibility.Collapsed;
         }
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private void UtanPengarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(GamePage));
+        }
+
+        private void MedBankButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UtanBankButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

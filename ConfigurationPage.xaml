@@ -10,7 +10,7 @@
 
     <Grid Width="1280" Height="720" Background="#FFA3A3A3">
         <TextBlock x:Name="SpellageTitleText" HorizontalAlignment="Center" Margin="0,24,0,0" TextWrapping="Wrap" Text="Välj Spelläge" VerticalAlignment="Top" FontSize="80"/>
-        <Button x:Name="UtanPengarButton" Content="Utan Pengar" Margin="269,535,0,0" VerticalAlignment="Top" Background="Red" CornerRadius="15,15,15,15" Width="175" Height="75" FontSize="30" BorderBrush="Black" BorderThickness="1,1,1,1" Click="OkButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="UtanPengarButton" Content="Utan Pengar" Margin="269,535,0,0" VerticalAlignment="Top" Background="Red" CornerRadius="15,15,15,15" Width="175" Height="75" FontSize="30" BorderBrush="Black" BorderThickness="1,1,1,1" Click="UtanPengarButton_Click" Style="{StaticResource AccentButtonStyle}"/>
         <Button x:Name="InfoButton" Content="i" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FF0062FF" BorderBrush="Black" Height="75" Width="75" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" FontSize="70" FontFamily="Mongolian Baiti" Click="InfoButton_Click" Style="{StaticResource AccentButtonStyle}"/>
         <Rectangle x:Name="BlurRectangle" Height="720" Stroke="Black" Width="1280" Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True" Opacity="0.5"/>
 
@@ -25,7 +25,7 @@
                 </Grid>
             </StackPanel>
         </Popup>
-        <Button x:Name="MedBankButton" Content="Med Bank" Margin="0,535,0,0" VerticalAlignment="Top" Background="#FF00EE13" CornerRadius="15,15,15,15" Width="175" Height="75" FontSize="30" BorderBrush="Black" BorderThickness="1,1,1,1" Click="OkButton_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Center"/>
-        <Button x:Name="UtanBankButton" Content="Utan Bank" Margin="848,535,0,0" VerticalAlignment="Top" Background="#FF0062FF" CornerRadius="15,15,15,15" Width="175" Height="75" FontSize="30" BorderBrush="Black" BorderThickness="1,1,1,1" Click="OkButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="MedBankButton" Content="Med Bank" Margin="0,535,0,0" VerticalAlignment="Top" Click="MedBankButton_Click" Width="175" Height="75" HorizontalAlignment="Center" FontSize="30" BorderThickness="1,1,1,1" BorderBrush="Black" CornerRadius="15,15,15,15" Background="#FF00EE13" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="UtanBankButton" Content="Utan Bank" Margin="848,535,0,0" VerticalAlignment="Top" Click="UtanBankButton_Click" Width="175" Height="75" BorderThickness="1,1,1,1" BorderBrush="Black" FontSize="30" Background="#FF0062FF" CornerRadius="15,15,15,15" Style="{StaticResource AccentButtonStyle}"/>
     </Grid>
 </Page>
