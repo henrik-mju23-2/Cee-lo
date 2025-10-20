@@ -318,5 +318,25 @@ namespace Cee_lo
         {
 
         }
+
+        private void CasinoChip5Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CasinoChip25Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CasinoChip50Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CasinoChip100Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
