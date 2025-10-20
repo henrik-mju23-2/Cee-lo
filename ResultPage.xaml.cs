@@ -31,28 +31,18 @@ namespace Cee_lo
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.Parameter is int[] scores && scores.Length == 2)
-            {
-                int bankPoints = scores[0];
-                int playerPoints = scores[1];
-                BankTextBlock.Text = $"Bank Poäng: {bankPoints}";
-                PlayerTextBlock.Text = $"Spelare 1 Poäng: {playerPoints}";
 
-                if (bankPoints > playerPoints) 
-                {
-                    ResultatTextBlock.Text = "Banken vann!";
-                }
-                else if(playerPoints > bankPoints)
-                {
-                    ResultatTextBlock.Text = "Spelare 1 vann!";
-                }
-                else
-                {
-                    ResultatTextBlock.Text = "Oavgjort.";
-                }
+            if (e.Parameter is object[] arr && arr.Length >= 3 && arr[0] is string modeStr)
+            {
+                var mode = modeStr;
+                int bank = Convert.ToInt32(arr[1]);
+                int player = Convert.ToInt32(arr[2]);
+
+                // show mode and numbers using Swedish labels
+                BankTextBlock.Text = $"Bank: {bank}";
+                PlayerTextBlock.Text = $"Spelare 1: {player}";
             }
         }
-
 
         private void ResultatPageBackButton_Click(object sender, RoutedEventArgs e)
         {

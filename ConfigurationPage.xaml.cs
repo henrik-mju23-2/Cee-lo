@@ -27,10 +27,6 @@ namespace Cee_lo
         {
             this.InitializeComponent();
             BlurRectangle.Visibility = Visibility.Collapsed;
-
-            MedBankButton.IsHitTestVisible = false;
-
-            UtanBankButton.IsHitTestVisible = false;
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
@@ -47,17 +43,18 @@ namespace Cee_lo
 
         private void UtanPengarButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(GamePage));
+            Frame.Navigate(typeof(GamePage), "UtanPengar");
         }
 
         private void MedBankButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(GamePage), "MedBank");
         }
 
         private void UtanBankButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(GamePage), "UtanBank");
         }
+
     }
 }
