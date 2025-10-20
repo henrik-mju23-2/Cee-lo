@@ -165,6 +165,8 @@
                 <ImageBrush ImageSource="/Assets/CasinoChip100.png"/>
             </Button.Background>
         </Button>
+        <TextBlock x:Name="BankStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="617,190,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="PlayerStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="617,264,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
