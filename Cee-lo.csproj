@@ -139,6 +139,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\CasinoChip100.png" />
+    <Content Include="Assets\CasinoChip25.png" />
+    <Content Include="Assets\CasinoChip5.png" />
+    <Content Include="Assets\CasinoChip50.png" />
     <Content Include="Assets\Die1.png" />
     <Content Include="Assets\Die2.png" />
     <Content Include="Assets\Die3.png" />
