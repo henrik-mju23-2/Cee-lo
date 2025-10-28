@@ -93,9 +93,9 @@
         <Rectangle x:Name="Rectangle2_Copy23" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="78" Fill="#FFD41717" StrokeThickness="0" Margin="247,216,0,0"/>
         <TextBlock HorizontalAlignment="Left" Margin="246,237,0,0" TextWrapping="Wrap" Text="Bank" VerticalAlignment="Top" Foreground="Black" FontSize="20" SelectionChanged="TextBlock_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="248,612,0,0" TextWrapping="Wrap" Text="Spelare 1" VerticalAlignment="Top" Foreground="Black" FontSize="20" SelectionChanged="TextBlock_SelectionChanged_1"/>
-        <Button x:Name="DieButton" Margin="418,518,0,0" VerticalAlignment="Top" Width="128" Height="128" CornerRadius="15,15,15,15" BorderBrush="Black" BorderThickness="1,1,1,1" Click="DieButton_Click" Grid.Column="1" Style="{StaticResource AccentButtonStyle}">
+        <Button x:Name="DieButton" Margin="418,518,0,0" VerticalAlignment="Top" Width="128" Height="128" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" Click="DieButton_Click" Grid.Column="1" Style="{StaticResource AccentButtonStyle}">
             <Button.Background>
-                <ImageBrush ImageSource="/Assets/DieButtonImage.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="ms-appx:///Assets/DieButtonImage.png"/>
             </Button.Background>
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="454,481,0,0" TextWrapping="Wrap" Text="Rulla" VerticalAlignment="Top" Foreground="Black" FontSize="24" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged" Grid.Column="1"/>
