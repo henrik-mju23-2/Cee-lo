@@ -32,6 +32,9 @@ namespace Cee_lo
         private int? bankPairValue = null; // for pair+{2..5} comparison
         private GameMode currentMode = GameMode.UtanPengar;
 
+        // track player's pair kicker when player rolls first (so bank can respond in the same round)
+        private int? playerPairValue = null;
+
         // chip values
         private readonly int[] chipValues = new[] { 5, 25, 50, 100 };
 
@@ -164,15 +167,26 @@ namespace Cee_lo
             BankDieSlot3.Background = new ImageBrush { ImageSource = defaultImage };
         }
 
-        private async Task BankRollAsync()
+        private async Task BankRollAsync(bool isResponseToPlayer = false)
         {
-            // Reset stakes for new bank turn
-            bankStake = 0;
-            playerStake = 0;
-            bankPairValue = null;
+            // If this is a brand new bank turn (not the bank responding to a player-first roll),
+            // reset stakes/pair state and die slots.
+            if (!isResponseToPlayer)
+            {
+                // Reset stakes for new bank turn
+                bankStake = 0;
+                playerStake = 0;
+                bankPairValue = null;
+                playerPairValue = null;
 
-            // Reset DieSlot images
-            ResetDiceSlots();
+                // Reset DieSlot images
+                ResetDiceSlots();
+            }
+            else
+            {
+                // Bank is rolling in response to a player-first result — do NOT clear player's pair/slot images/stakes.
+                // Keep bankPairValue as-is (it will be set if bank gets a pair) and preserve playerPairValue.
+            }
 
             if (currentMode == GameMode.UtanPengar)
             {
@@ -392,9 +406,82 @@ namespace Cee_lo
                 return;
             }
 
-            // pair + kicker (2..5) => bank waiting for player to roll (player must choose stake after bank's stake is set)
+            // pair + kicker (2..5) => either bank waiting for player to roll (bank-first),
+            // or if playerPairValue exists this is bank responding to player-first and we should compare immediately.
             if (HasPairWithKicker(dice, out int pairVal, out int kicker) && kicker >= 2 && kicker <= 5)
             {
+                // If player already rolled first and saved a player's kicker, compare immediately:
+                if (playerPairValue.HasValue)
+                {
+                    // bank has pair+kicker, player had pair+kicker -> compare
+                    int playerKicker = playerPairValue.Value;
+                    int bankKicker = kicker;
+
+                    // Display bank's number in BankStakeTextBlock for UtanPengar readability
+                    if (currentMode == GameMode.UtanPengar)
+                    {
+                        BankStakeTextBlock.Visibility = Visibility.Visible;
+                        BankStakeTextBlock.Text = $"Bankens nummer: {bankKicker}";
+                    }
+
+                    // Compare
+                    if (bankKicker > playerKicker)
+                    {
+                        if (currentMode == GameMode.UtanPengar)
+                        {
+                            BankPoints++;
+                            InfoTextBlock1.Text = $"{pairVal}-{pairVal}-{bankKicker}, Banken vinner omgången!";
+                            BankPointsTextBlock.Text = $"Poäng: {BankPoints}";
+                        }
+                        else
+                        {
+                            await SettleMoneyRound(winnerIsBank: true);
+                            InfoTextBlock1.Text = $"{pairVal}-{pairVal}-{bankKicker}, Banken vinner omgången!";
+                        }
+                    }
+                    else if (bankKicker < playerKicker)
+                    {
+                        if (currentMode == GameMode.UtanPengar)
+                        {
+                            PlayerPoints++;
+                            InfoTextBlock1.Text = $"{pairVal}-{pairVal}-{bankKicker}, Spelaren vinner omgången!";
+                            PlayerPointsTextBlock.Text = $"Poäng: {PlayerPoints}";
+                        }
+                        else
+                        {
+                            await SettleMoneyRound(winnerIsBank: false);
+                            InfoTextBlock1.Text = $"{pairVal}-{pairVal}-{bankKicker}, Spelaren vinner omgången!";
+                        }
+                    }
+                    else // tie
+                    {
+                        InfoTextBlock1.Text = $"{pairVal}-{pairVal}-{bankKicker}, Oavgjort!";
+                        if (currentMode != GameMode.UtanPengar)
+                        {
+                            // release reserved stakes
+                            BankPoints += bankStake;
+                            PlayerPoints += playerStake;
+                            BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
+                            PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
+                        }
+                    }
+
+                    // Clear stored playerPairValue now that round resolved
+                    playerPairValue = null;
+
+                    InfoTextBlock1.Visibility = Visibility.Visible;
+
+                    // show "Nästa runda..." and then continue to next round
+                    await Task.Delay(3000);
+                    InfoTextBlock1.Text = "Nästa runda...";
+                    InfoTextBlock1.Visibility = Visibility.Visible;
+                    await Task.Delay(3000);
+
+                    await EndBankTurnAsync();
+                    return;
+                }
+
+                // Existing bank-first behaviour: set bankPairValue and wait for player to stake/roll
                 bankPairValue = kicker;
 
                 if (currentMode == GameMode.UtanPengar)
@@ -404,7 +491,6 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Text = "Spelare 1:s tur att rulla!";
-                UpdateInfoTextBlock2(dice);
                 InfoTextBlock1.Visibility = Visibility.Visible;
 
                 // If money mode, enable chips for player to choose stake (only those that won't cause negative balances)
@@ -593,7 +679,9 @@ namespace Cee_lo
                 }
                 else
                 {
-                    // Player rolled first: bank now rolls automatically
+                    // Player rolled first: remember player's kicker and then let bank roll in the same round.
+                    playerPairValue = kicker; // <--- store player's number so bank can be compared against it
+
                     InfoTextBlock1.Text = $"{diceText}, Banken rullar nu...";
                     InfoTextBlock1.Visibility = Visibility.Visible;
 
@@ -601,8 +689,9 @@ namespace Cee_lo
                     DieButton.Opacity = 0.5;
 
                     await Task.Delay(2000); // small delay so player can read number
-                    await BankRollAsync();   // **trigger bank roll for the same round**
+                    await BankRollAsync(isResponseToPlayer: true);   // <-- bank rolls as response; do not reset player state
                     return; // do not continue further
+
                 }
             }
             else
