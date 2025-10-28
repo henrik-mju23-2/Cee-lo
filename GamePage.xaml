@@ -169,7 +169,7 @@
         <TextBlock x:Name="BankStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="617,190,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="PlayerStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="617,264,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Left" Height="64" Margin="409,463,0,0" VerticalAlignment="Top" Width="518" Source="/Assets/InfoBox.png" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="InfoTextBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="59,489,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="InfoTextBlock2" HorizontalAlignment="Left" Margin="454,479,0,0" TextWrapping="Wrap" Text="4-5-6, automatisk vinst för Banken" VerticalAlignment="Top" FontSize="20" Grid.ColumnSpan="2" Width="460"/>
 
     </Grid>
 </Page>

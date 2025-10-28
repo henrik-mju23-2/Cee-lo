@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,6 +47,11 @@ namespace Cee_lo
                 if (bank > player)
                 {
                     ResultatTextBlock.Text = "Banken vann!";
+                    Rectangle2_Copy.Fill = new SolidColorBrush(ColorHelper.FromArgb(0xFF, 0xD4, 0x17, 0x17));
+                    Rectangle2_Copy1.Fill = new SolidColorBrush(ColorHelper.FromArgb(0xFF, 0xD4, 0x17, 0x17));
+                    Rectangle2_Copy2.Fill = new SolidColorBrush(ColorHelper.FromArgb(0xFF, 0xD4, 0x17, 0x17));
+                    Rectangle2_Copy3.Fill = new SolidColorBrush(ColorHelper.FromArgb(0xFF, 0xD4, 0x17, 0x17));
+
                 }
                 else if (player > bank)
                 {
