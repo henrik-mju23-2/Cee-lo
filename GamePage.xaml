@@ -81,40 +81,40 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="InfoButton" Content="i" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FF0062FF" Height="75" Width="75" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" FontSize="70" FontFamily="Mongolian Baiti" Click="InfoButton_Click" Style="{StaticResource AccentButtonStyle}"/>
         <Rectangle x:Name="Rectangle1" HorizontalAlignment="Left" Height="667" VerticalAlignment="Center" Width="888" Fill="#FF2BA748" RadiusX="15" RadiusY="15" Margin="196,0,0,0" Grid.ColumnSpan="2"/>
-        <Rectangle x:Name="Rectangle2_Copy14" HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="111" Fill="White" RadiusX="15" RadiusY="15" Margin="233,498,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy15" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="50" Fill="#FF0062FF" RadiusX="360" RadiusY="360" Margin="263,509,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy16" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="79" Fill="#FF0062FF" RadiusY="30" RadiusX="30" Margin="247,570,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy17" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="79" Fill="#FF0062FF" Margin="247,589,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy18" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="78" Fill="#FF0062FF" StrokeThickness="0" Margin="249,586,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy19" HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="111" Fill="White" RadiusX="15" RadiusY="15" Margin="231,128,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy20" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="50" Fill="#FFD41717" RadiusX="360" RadiusY="360" Margin="261,139,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy21" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="79" Fill="#FFD41717" RadiusY="30" RadiusX="30" Margin="245,200,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy22" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="79" Fill="#FFD41717" Margin="245,219,0,0"/>
-        <Rectangle x:Name="Rectangle2_Copy23" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="78" Fill="#FFD41717" StrokeThickness="0" Margin="247,216,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="246,237,0,0" TextWrapping="Wrap" Text="Bank" VerticalAlignment="Top" Foreground="Black" FontSize="20" SelectionChanged="TextBlock_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="248,612,0,0" TextWrapping="Wrap" Text="Spelare 1" VerticalAlignment="Top" Foreground="Black" FontSize="20" SelectionChanged="TextBlock_SelectionChanged_1"/>
-        <Button x:Name="DieButton" Margin="418,518,0,0" VerticalAlignment="Top" Width="128" Height="128" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" Click="DieButton_Click" Grid.Column="1" Style="{StaticResource AccentButtonStyle}">
+        <Rectangle x:Name="Rectangle2_Copy14" HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="111" Fill="White" RadiusX="15" RadiusY="15" Margin="231,544,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy15" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="50" Fill="#FF0062FF" RadiusX="360" RadiusY="360" Margin="261,555,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy16" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="79" Fill="#FF0062FF" RadiusY="30" RadiusX="30" Margin="245,616,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy17" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="79" Fill="#FF0062FF" Margin="245,636,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy18" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="78" Fill="#FF0062FF" StrokeThickness="0" Margin="247,632,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy19" HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="111" Fill="White" RadiusX="15" RadiusY="15" Margin="231,52,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy20" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="50" Fill="#FFD41717" RadiusX="360" RadiusY="360" Margin="261,63,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy21" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="79" Fill="#FFD41717" RadiusY="30" RadiusX="30" Margin="245,124,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy22" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="79" Fill="#FFD41717" Margin="245,144,0,0"/>
+        <Rectangle x:Name="Rectangle2_Copy23" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="78" Fill="#FFD41717" StrokeThickness="0" Margin="247,140,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="246,166,0,0" TextWrapping="Wrap" Text="Bank" VerticalAlignment="Top" Foreground="Black" FontSize="20" SelectionChanged="TextBlock_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="246,658,0,0" TextWrapping="Wrap" Text="Spelare 1" VerticalAlignment="Top" Foreground="Black" FontSize="20" SelectionChanged="TextBlock_SelectionChanged_1"/>
+        <Button x:Name="DieButton" Margin="422,533,0,0" VerticalAlignment="Top" Width="128" Height="128" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" Click="DieButton_Click" Grid.Column="1" Style="{StaticResource AccentButtonStyle}">
             <Button.Background>
                 <ImageBrush ImageSource="ms-appx:///Assets/DieButtonImage.png"/>
             </Button.Background>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="454,481,0,0" TextWrapping="Wrap" Text="Rulla" VerticalAlignment="Top" Foreground="Black" FontSize="24" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged" Grid.Column="1"/>
-        <Button x:Name="BankDieSlot1" Content="" Margin="451,128,0,0" VerticalAlignment="Top" Width="113" Height="113" Grid.ColumnSpan="2" Click="BankDieSlot1_Click">
+        <TextBlock HorizontalAlignment="Left" Margin="458,496,0,0" TextWrapping="Wrap" Text="Rulla" VerticalAlignment="Top" Foreground="Black" FontSize="24" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged" Grid.Column="1"/>
+        <Button x:Name="BankDieSlot1" Content="" Margin="473,52,0,0" VerticalAlignment="Top" Width="113" Height="113" Grid.ColumnSpan="2" Click="BankDieSlot1_Click">
             <Button.Background>
                 <ImageBrush Stretch="Fill" ImageSource="/Assets/DieSlot.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="DieSlot1" Content="" Margin="457,498,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="DieSlot1_Click" Style="{StaticResource AccentButtonStyle}" Grid.ColumnSpan="2" IsTapEnabled="False" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False">
+        <Button x:Name="DieSlot1" Content="" Margin="479,544,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="DieSlot1_Click" Style="{StaticResource AccentButtonStyle}" Grid.ColumnSpan="2" IsTapEnabled="False" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/DieSlot.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="DieSlot2" Content="" Margin="91,498,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="DieSlot2_Click" Style="{StaticResource AccentButtonStyle}" Grid.Column="1" IsTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False">
+        <Button x:Name="DieSlot2" Content="" Margin="113,544,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="DieSlot2_Click" Style="{StaticResource AccentButtonStyle}" Grid.Column="1" IsTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/DieSlot.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="DieSlot3" Content="" Margin="234,498,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="DieSlot3_Click" Style="{StaticResource AccentButtonStyle}" Grid.Column="1" IsTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False">
+        <Button x:Name="DieSlot3" Content="" Margin="256,544,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="DieSlot3_Click" Style="{StaticResource AccentButtonStyle}" Grid.Column="1" IsTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/DieSlot.png"/>
             </Button.Background>
@@ -131,16 +131,17 @@
                 </Grid>
             </StackPanel>
         </Popup>
-        <TextBlock x:Name="PlayerPointsTextBlock" HorizontalAlignment="Left" Margin="357,498,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" SelectionChanged="PlayerPointsTextBlock_SelectionChanged_1" FontSize="22" Text="Poäng: 0"/>
+        <TextBlock x:Name="PlayerPointsTextBlock" HorizontalAlignment="Left" Margin="355,544,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" SelectionChanged="PlayerPointsTextBlock_SelectionChanged_1" FontSize="22" Text="Poäng: 0"/>
         <Button x:Name="EndButton" Content="Avsluta" Margin="586,564,0,0" VerticalAlignment="Top" Width="175" Height="75" Background="#FF0062FF" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" FontSize="36" Click="EndButton_Click" Grid.Column="1"/>
-        <TextBlock x:Name="InfoTextBlock1" HorizontalAlignment="Left" Margin="233,0,0,0" TextWrapping="Wrap" Text="Bank rullar först" VerticalAlignment="Center" Foreground="Red" FontSize="72" Grid.ColumnSpan="2" SelectionChanged="InfoTextBlock_SelectionChanged"/>
-        <TextBlock x:Name="BankPointsTextBlock" HorizontalAlignment="Left" Margin="357,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Foreground="Black" Text="Poäng: 0" SelectionChanged="BankPointsTextBlock_SelectionChanged"/>
-        <Button x:Name="BankDieSlot2" Grid.Column="1" Content="" Margin="91,128,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="BankDieSlot2_Click">
+        <Rectangle Margin="355,190,300,262" Fill="#FF206C32" Grid.ColumnSpan="2" RadiusX="10" RadiusY="10"/>
+        <TextBlock x:Name="InfoTextBlock1" HorizontalAlignment="Left" Margin="397,199,0,0" TextWrapping="Wrap" Text="Bank rullar först" VerticalAlignment="Top" FontSize="65" Grid.ColumnSpan="2" SelectionChanged="InfoTextBlock_SelectionChanged" FocusVisualPrimaryBrush="#FFF2FF00" Foreground="#FFF2FF00" Height="246" TextAlignment="Center" Width="538"/>
+        <TextBlock x:Name="BankPointsTextBlock" HorizontalAlignment="Left" Margin="357,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Foreground="Black" Text="Poäng: 0" SelectionChanged="BankPointsTextBlock_SelectionChanged"/>
+        <Button x:Name="BankDieSlot2" Grid.Column="1" Content="" Margin="113,52,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="BankDieSlot2_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/DieSlot.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="BankDieSlot3" Grid.Column="1" Margin="234,128,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="BankDieSlot3_Click">
+        <Button x:Name="BankDieSlot3" Grid.Column="1" Margin="256,52,0,0" VerticalAlignment="Top" Width="113" Height="113" Click="BankDieSlot3_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/DieSlot.png"/>
             </Button.Background>
@@ -167,6 +168,8 @@
         </Button>
         <TextBlock x:Name="BankStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="617,190,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="PlayerStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="617,264,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="64" Margin="409,463,0,0" VerticalAlignment="Top" Width="518" Source="/Assets/InfoBox.png" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="InfoTextBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="59,489,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
