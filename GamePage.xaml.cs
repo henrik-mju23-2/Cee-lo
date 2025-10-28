@@ -149,12 +149,30 @@ namespace Cee_lo
             slot3.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri($"ms-appx:///Assets/Die{dice[2]}.png")) };
         }
 
+        private void ResetDiceSlots()
+        {
+            var defaultImage = new BitmapImage(new Uri("ms-appx:///Assets/DieSlot.png"));
+
+            // Player dice
+            DieSlot1.Background = new ImageBrush { ImageSource = defaultImage };
+            DieSlot2.Background = new ImageBrush { ImageSource = defaultImage };
+            DieSlot3.Background = new ImageBrush { ImageSource = defaultImage };
+
+            // Bank dice
+            BankDieSlot1.Background = new ImageBrush { ImageSource = defaultImage };
+            BankDieSlot2.Background = new ImageBrush { ImageSource = defaultImage };
+            BankDieSlot3.Background = new ImageBrush { ImageSource = defaultImage };
+        }
+
         private async Task BankRollAsync()
         {
             // Reset stakes for new bank turn
             bankStake = 0;
             playerStake = 0;
             bankPairValue = null;
+
+            // Reset DieSlot images
+            ResetDiceSlots();
 
             if (currentMode == GameMode.UtanPengar)
             {
@@ -230,11 +248,15 @@ namespace Cee_lo
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
 
+                ResetDiceSlots();
+
                 // give time to read result, then show "Nästa runda..." before handing over
                 await Task.Delay(3000);
                 InfoTextBlock1.Text = "Nästa runda...";
                 InfoTextBlock1.Visibility = Visibility.Visible;
                 await Task.Delay(3000);
+
+                ResetDiceSlots();
 
                 await EndBankTurnAsync();
                 return;
@@ -259,6 +281,8 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
+
+                ResetDiceSlots();
 
                 // give time to read result, then show "Nästa runda..." before handing over
                 await Task.Delay(3000);
@@ -288,6 +312,8 @@ namespace Cee_lo
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
 
+                ResetDiceSlots();
+
                 // give time to read result, then show "Nästa runda..." before handing over
                 await Task.Delay(3000);
                 InfoTextBlock1.Text = "Nästa runda...";
@@ -314,6 +340,8 @@ namespace Cee_lo
                     BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                     PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
+
+                ResetDiceSlots();
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
 
@@ -343,6 +371,8 @@ namespace Cee_lo
                     BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                     PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
+
+                ResetDiceSlots();
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
 
@@ -467,6 +497,8 @@ namespace Cee_lo
                     BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                     PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
+
+                ResetDiceSlots();
             }
             else if (dice.SequenceEqual(new[] { 1, 2, 3 }))
             {
@@ -483,6 +515,8 @@ namespace Cee_lo
                     BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                     PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
+
+                ResetDiceSlots();
             }
             else if (dice[0] == dice[1] && dice[1] == dice[2]) // triple -> player wins
             {
@@ -499,6 +533,8 @@ namespace Cee_lo
                     BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                     PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
+
+                ResetDiceSlots();
             }
             else if ((dice[0] == dice[1] && dice[2] == 6) || (dice[1] == dice[2] && dice[0] == 6) || (dice[0] == dice[2] && dice[1] == 6))
             {
@@ -515,6 +551,8 @@ namespace Cee_lo
                     BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                     PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
+
+                ResetDiceSlots();
             }
             else if ((dice[0] == dice[1] && dice[2] == 1) || (dice[1] == dice[2] && dice[0] == 1) || (dice[0] == dice[2] && dice[1] == 1))
             {
@@ -531,6 +569,8 @@ namespace Cee_lo
                     BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                     PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
+
+                ResetDiceSlots();
             }
             else if (HasPairWithKicker(dice, out int pairValue, out int kicker) && kicker >= 2 && kicker <= 5)
             {
@@ -626,6 +666,7 @@ namespace Cee_lo
 
             // Start next bank turn
             await Task.Delay(3000);
+            ResetDiceSlots();
             await BankRollAsync();
         }
 
