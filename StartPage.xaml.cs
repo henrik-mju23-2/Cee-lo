@@ -41,5 +41,10 @@ namespace Cee_lo
         {
 
         }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
     }
 }

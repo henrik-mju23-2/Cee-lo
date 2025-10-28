@@ -9,11 +9,21 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Height="720" Width="1280" Background="#FF999999">
-        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="195,117,0,0" TextWrapping="Wrap" Text="Cee-lo" VerticalAlignment="Top" FontSize="300" RenderTransformOrigin="0.5,0.5" FocusVisualSecondaryBrush="#99000000" SelectionChanged="TitleText_SelectionChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="195,117,0,0" TextWrapping="Wrap" Text="Cee-lo" VerticalAlignment="Top" FontSize="300" RenderTransformOrigin="0.5,0.5" FocusVisualSecondaryBrush="#99000000" SelectionChanged="TitleText_SelectionChanged" Height="399" Width="885">
             <TextBlock.RenderTransform>
                 <CompositeTransform TranslateX="2"/>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button x:Name="StartButton" Content="Start" Margin="0,516,0,0" VerticalAlignment="Top" Background="#FF0062FF" Width="175" Height="75" FontSize="48" HorizontalAlignment="Center" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" Click="StartButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="StartButton" Content="Start" Margin="0,516,0,0" VerticalAlignment="Top" Background="#FF0062FF" Width="175" Height="75" FontSize="48" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" Click="StartButton_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Center"/>
+        <Button x:Name="ExitButton" Margin="1202,27,0,0" VerticalAlignment="Top" Width="50" Height="50" Style="{StaticResource AccentButtonStyle}" Click="ExitButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Assets/ExitButton.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

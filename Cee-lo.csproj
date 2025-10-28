@@ -151,6 +151,7 @@
     <Content Include="Assets\Die6.png" />
     <Content Include="Assets\DieButtonImage.png" />
     <Content Include="Assets\DieSlot.png" />
+    <Content Include="Assets\ExitButton.png" />
     <Content Include="Assets\InfoBox.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
