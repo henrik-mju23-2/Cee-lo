@@ -192,6 +192,12 @@ namespace Cee_lo
                 InfoTextBlock1.Visibility = Visibility.Collapsed;
             }
 
+            // show bank rolling indicator before each full bank roll
+            InfoTextBlock1.Text = "Banken rullar tärningarna...";
+            InfoTextBlock1.Visibility = Visibility.Visible;
+            await Task.Delay(3000);
+            InfoTextBlock1.Visibility = Visibility.Collapsed;
+
             // Bank rolls
             int[] dice = RollDice();
             Array.Sort(dice);
@@ -223,6 +229,13 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
+
+                // give time to read result, then show "Nästa runda..." before handing over
+                await Task.Delay(3000);
+                InfoTextBlock1.Text = "Nästa runda...";
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+
                 await EndBankTurnAsync();
                 return;
             }
@@ -246,6 +259,13 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
+
+                // give time to read result, then show "Nästa runda..." before handing over
+                await Task.Delay(3000);
+                InfoTextBlock1.Text = "Nästa runda...";
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+
                 await EndBankTurnAsync();
                 return;
             }
@@ -267,6 +287,13 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
+
+                // give time to read result, then show "Nästa runda..." before handing over
+                await Task.Delay(3000);
+                InfoTextBlock1.Text = "Nästa runda...";
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+
                 await EndBankTurnAsync();
                 return;
             }
@@ -289,6 +316,13 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
+
+                // give time to read result, then show "Nästa runda..." before handing over
+                await Task.Delay(3000);
+                InfoTextBlock1.Text = "Nästa runda...";
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+
                 await EndBankTurnAsync();
                 return;
             }
@@ -311,6 +345,13 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Visibility = Visibility.Visible;
+
+                // give time to read result, then show "Nästa runda..." before handing over
+                await Task.Delay(3000);
+                InfoTextBlock1.Text = "Nästa runda...";
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+
                 await EndBankTurnAsync();
                 return;
             }
@@ -566,6 +607,10 @@ namespace Cee_lo
                 return;
             }
 
+            InfoTextBlock1.Visibility = Visibility.Visible;
+            // show "Nästa runda..." and allow time to read before starting next bank turn
+            await Task.Delay(3000);
+            InfoTextBlock1.Text = "Nästa runda...";
             InfoTextBlock1.Visibility = Visibility.Visible;
             await Task.Delay(3000);
 
