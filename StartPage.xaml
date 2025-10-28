@@ -14,6 +14,6 @@
                 <CompositeTransform TranslateX="2"/>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button x:Name="StartButton" Content="Start" Margin="0,516,0,0" VerticalAlignment="Top" Background="#FF0062FF" Width="175" Height="75" FontSize="48" HorizontalAlignment="Center" CornerRadius="15,15,15,15" BorderBrush="Black" BorderThickness="1,1,1,1" Click="StartButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="StartButton" Content="Start" Margin="0,516,0,0" VerticalAlignment="Top" Background="#FF0062FF" Width="175" Height="75" FontSize="48" HorizontalAlignment="Center" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" Click="StartButton_Click" Style="{StaticResource AccentButtonStyle}"/>
     </Grid>
 </Page>

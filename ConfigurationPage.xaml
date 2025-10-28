@@ -10,22 +10,22 @@
 
     <Grid Width="1280" Height="720" Background="#FFA3A3A3">
         <TextBlock x:Name="SpellageTitleText" HorizontalAlignment="Center" Margin="0,24,0,0" TextWrapping="Wrap" Text="Välj Spelläge" VerticalAlignment="Top" FontSize="80"/>
-        <Button x:Name="UtanPengarButton" Content="Utan Pengar" Margin="269,535,0,0" VerticalAlignment="Top" Background="Red" CornerRadius="15,15,15,15" Width="175" Height="75" FontSize="30" BorderBrush="Black" BorderThickness="1,1,1,1" Click="UtanPengarButton_Click" Style="{StaticResource AccentButtonStyle}"/>
-        <Button x:Name="InfoButton" Content="i" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FF0062FF" BorderBrush="Black" Height="75" Width="75" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" FontSize="70" FontFamily="Mongolian Baiti" Click="InfoButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="UtanPengarButton" Content="Utan Pengar" Margin="269,535,0,0" VerticalAlignment="Top" Background="Red" CornerRadius="15,15,15,15" Width="175" Height="75" FontSize="30" BorderThickness="1,1,1,1" Click="UtanPengarButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="InfoButton" Content="i" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FF0062FF" Height="75" Width="75" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" FontSize="70" FontFamily="Mongolian Baiti" Click="InfoButton_Click" Style="{StaticResource AccentButtonStyle}"/>
         <Rectangle x:Name="BlurRectangle" Height="720" Stroke="Black" Width="1280" Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True" Opacity="0.5"/>
 
         <Popup x:Name="InformationPopUp" Width="1024" Height="576" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="119,78,0,0" IsLightDismissEnabled="False" IsOpen="False">
             <StackPanel Background="White" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Grid Width="1024" Height="576" Background="#FFA3A3A3" BorderBrush="Black" BorderThickness="1,1,1,1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Width="1024" Height="576" Background="#FFA3A3A3" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock x:Name="InformationTitleText" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Information" VerticalAlignment="Top" FontSize="70"/>
-                    <ScrollViewer x:Name="InformationScrollViewer" Background="White" Width="800" Height="400" CornerRadius="15,15,15,15" BorderBrush="Black" BorderThickness="1,1,1,1" FontSize="24" Foreground="Black" HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" MaxZoomFactor="10">
+                    <ScrollViewer x:Name="InformationScrollViewer" Background="White" Width="800" Height="400" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" FontSize="24" Foreground="Black" HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" MaxZoomFactor="10">
                         <TextBlock x:Name="InfoTextBlock" TextWrapping="Wrap" FontSize="30" Margin="15,15,15,15" Text="Cee-lo är ett vadslagningsspel som spelas med tre sexsidiga tärningar. Spelet har flera varianter och har sitt ursprung i Kina. Spelet kräver att spelarna slår vissa kombinationer för att vinna. Spelet spelas i en grupp och har två olika lägen. Ett läge är att välja en spelare som bank och alla andra spelare satsar mot banken. Ett annat läge är att använda en pott för att placera insatser från alla spelare och vinnaren tar allt. Denna digitala version har också en version utan pengar, som istället ger poäng till vinnare av rundor."/>
                     </ScrollViewer>
-                    <Button x:Name="BackButton" Content="Tillbaka" Margin="0,495,0,0" VerticalAlignment="Top" Background="#FF0062FF" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Height="75" Width="175" FontSize="48" HorizontalAlignment="Center" Click="BackButton_Click"/>
+                    <Button x:Name="BackButton" Content="Tillbaka" Margin="0,495,0,0" VerticalAlignment="Top" Background="#FF0062FF" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Height="75" Width="175" FontSize="48" HorizontalAlignment="Center" Click="BackButton_Click"/>
                 </Grid>
             </StackPanel>
         </Popup>
-        <Button x:Name="MedBankButton" Content="Med Bank" Margin="0,535,0,0" VerticalAlignment="Top" Click="MedBankButton_Click" Width="175" Height="75" HorizontalAlignment="Center" FontSize="30" BorderThickness="1,1,1,1" BorderBrush="Black" CornerRadius="15,15,15,15" Background="#FF00EE13" Style="{StaticResource AccentButtonStyle}"/>
-        <Button x:Name="UtanBankButton" Content="Utan Bank" Margin="848,535,0,0" VerticalAlignment="Top" Click="UtanBankButton_Click" Width="175" Height="75" BorderThickness="1,1,1,1" BorderBrush="Black" FontSize="30" Background="#FF0062FF" CornerRadius="15,15,15,15" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="MedBankButton" Content="Med Bank" Margin="0,535,0,0" VerticalAlignment="Top" Click="MedBankButton_Click" Width="175" Height="75" HorizontalAlignment="Center" FontSize="30" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Background="#FF00EE13" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="UtanBankButton" Content="Utan Bank" Margin="848,535,0,0" VerticalAlignment="Top" Click="UtanBankButton_Click" Width="175" Height="75" BorderThickness="1,1,1,1" FontSize="30" Background="#FF0062FF" CornerRadius="15,15,15,15" Style="{StaticResource AccentButtonStyle}"/>
     </Grid>
 </Page>
