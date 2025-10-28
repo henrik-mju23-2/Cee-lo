@@ -41,6 +41,20 @@ namespace Cee_lo
                 // show mode and numbers using Swedish labels
                 BankTextBlock.Text = $"Bank: {bank}";
                 PlayerTextBlock.Text = $"Spelare 1: {player}";
+
+                // Determine winner
+                if (bank > player)
+                {
+                    ResultatTextBlock.Text = "Banken vann!";
+                }
+                else if (player > bank)
+                {
+                    ResultatTextBlock.Text = "Spelare 1 vann!";
+                }
+                else
+                {
+                    ResultatTextBlock.Text = "Oavgjort!";
+                }
             }
         }
 
