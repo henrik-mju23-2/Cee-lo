@@ -172,7 +172,7 @@
         <TextBlock x:Name="BankStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="612,307,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="15" Width="133" Height="33"/>
         <TextBlock x:Name="PlayerStakeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="612,357,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="15" Width="129" Height="37"/>
         <Image HorizontalAlignment="Left" Height="64" Margin="409,463,0,0" VerticalAlignment="Top" Width="518" Source="/Assets/InfoBox.png" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="InfoTextBlock2" HorizontalAlignment="Left" Margin="454,479,0,0" TextWrapping="Wrap" Text="4-5-6, automatisk vinst för Banken" VerticalAlignment="Top" FontSize="20" Grid.ColumnSpan="2" Width="460"/>
+        <TextBlock x:Name="InfoTextBlock2" HorizontalAlignment="Left" Margin="454,479,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Grid.ColumnSpan="2" Width="460"/>
         <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="591,345,0,0" VerticalAlignment="Top" Width="166" Fill="Black"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="612,246,0,0" TextWrapping="Wrap" Text="Info:" VerticalAlignment="Top" FontSize="30"/>
 

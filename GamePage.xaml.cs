@@ -235,6 +235,7 @@ namespace Cee_lo
                 {
                     BankPoints++;
                     InfoTextBlock1.Text = "4-5-6, Automatisk vinst för banken!";
+                    UpdateInfoTextBlock2(dice);
                     BankPointsTextBlock.Text = $"Poäng: {BankPoints}";
                 }
                 else
@@ -268,6 +269,7 @@ namespace Cee_lo
                 {
                     PlayerPoints++;
                     InfoTextBlock1.Text = "1-2-3, Automatisk förlust för banken!";
+                    UpdateInfoTextBlock2(dice);
                     PlayerPointsTextBlock.Text = $"Poäng: {PlayerPoints}";
                 }
                 else
@@ -300,6 +302,7 @@ namespace Cee_lo
                 {
                     BankPoints++;
                     InfoTextBlock1.Text = $"{diceText}, Automatisk vinst för banken!";
+                    UpdateInfoTextBlock2(dice);
                     BankPointsTextBlock.Text = $"Poäng: {BankPoints}";
                 }
                 else
@@ -331,6 +334,7 @@ namespace Cee_lo
                 {
                     BankPoints++;
                     InfoTextBlock1.Text = $"{diceText}, Automatisk vinst för banken!";
+                    UpdateInfoTextBlock2(dice);
                     BankPointsTextBlock.Text = $"Poäng: {BankPoints}";
                 }
                 else
@@ -362,6 +366,7 @@ namespace Cee_lo
                 {
                     PlayerPoints++;
                     InfoTextBlock1.Text = $"{diceText}, Automatisk förlust för banken!";
+                    UpdateInfoTextBlock2(dice);
                     PlayerPointsTextBlock.Text = $"Poäng: {PlayerPoints}";
                 }
                 else
@@ -398,6 +403,7 @@ namespace Cee_lo
                 }
 
                 InfoTextBlock1.Text = "Spelare 1:s tur att rulla!";
+                UpdateInfoTextBlock2(dice);
                 InfoTextBlock1.Visibility = Visibility.Visible;
 
                 // If money mode, enable chips for player to choose stake (only those that won't cause negative balances)
@@ -418,6 +424,7 @@ namespace Cee_lo
 
             // else: three different numbers (not 4-5-6 or 1-2-3) => bank rerolls
             InfoTextBlock1.Text = $"{diceText}, Banken får rulla om...";
+            UpdateInfoTextBlock2(dice);
             InfoTextBlock1.Visibility = Visibility.Visible;
             await Task.Delay(6000);
             // reroll
@@ -477,6 +484,8 @@ namespace Cee_lo
 
         private async Task EvaluatePlayerRollAsync(int[] dice)
         {
+            UpdateInfoTextBlock2(dice);
+
             Array.Sort(dice);
             string diceText = string.Join("-", dice);
 
@@ -806,6 +815,51 @@ namespace Cee_lo
             // Pass mode and final numbers to ResultPage
             Frame.Navigate(typeof(ResultPage), new object[] { currentMode.ToString(), BankPoints, PlayerPoints });
         }
+
+        private void UpdateInfoTextBlock2(int[] dice)
+        {
+            Array.Sort(dice); // always sort for consistent messages
+            string diceText = string.Join("-", dice);
+
+            string info2 = "";
+
+            // Automatic 4-5-6
+            if (dice.SequenceEqual(new[] { 4, 5, 6 }))
+            {
+                info2 = $"{diceText}, automatisk vinst";
+            }
+            // Automatic 1-2-3
+            else if (dice.SequenceEqual(new[] { 1, 2, 3 }))
+            {
+                info2 = $"{diceText}, automatisk förlust";
+            }
+            // Triple or pair+6 or pair+1
+            else if (dice[0] == dice[1] && dice[1] == dice[2]) // triple
+            {
+                info2 = $"{diceText}, automatisk vinst";
+            }
+            else if ((dice[0] == dice[1] && dice[2] == 6) || (dice[1] == dice[2] && dice[0] == 6) || (dice[0] == dice[2] && dice[1] == 6))
+            {
+                info2 = $"{diceText}, automatisk vinst";
+            }
+            else if ((dice[0] == dice[1] && dice[2] == 1) || (dice[1] == dice[2] && dice[0] == 1) || (dice[0] == dice[2] && dice[1] == 1))
+            {
+                info2 = $"{diceText}, automatisk förlust";
+            }
+            // Pair + kicker 2..5
+            else if (HasPairWithKicker(dice, out int pairVal, out int kicker) && kicker >= 2 && kicker <= 5)
+            {
+                info2 = $"{diceText}, slå en {pairVal + 1}-a eller högre för att vinna";
+            }
+            // All other rolls
+            else
+            {
+                info2 = $"{diceText}, ogiltigt resultat";
+            }
+
+            InfoTextBlock2.Text = info2;
+        }
+
 
         // Empty handlers preserved (existing XAML wiring)
         private void BankDieSlot1_Click(object sender, RoutedEventArgs e) { }
