@@ -223,6 +223,7 @@ namespace Cee_lo
             await EvaluateBankRollAsync(dice);
         }
 
+
         private async Task EvaluateBankRollAsync(int[] dice)
         {
             Array.Sort(dice);
@@ -484,50 +485,19 @@ namespace Cee_lo
 
         private async Task EvaluatePlayerRollAsync(int[] dice)
         {
-            UpdateInfoTextBlock2(dice);
-
             Array.Sort(dice);
             string diceText = string.Join("-", dice);
 
-            // Automatic player outcomes
-            if (dice.SequenceEqual(new[] { 4, 5, 6 }))
-            {
-                if (currentMode == GameMode.UtanPengar)
-                {
-                    PlayerPoints++;
-                    InfoTextBlock1.Text = "4-5-6, Automatisk vinst för spelaren!";
-                    PlayerPointsTextBlock.Text = $"Poäng: {PlayerPoints}";
-                }
-                else
-                {
-                    // player wins; settlement uses stakes if any
-                    await SettleMoneyRound(winnerIsBank: false);
-                    InfoTextBlock1.Text = "4-5-6, Spelaren vinner omgången!";
-                    BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
-                    PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
-                }
+            // Update InfoTextBlock2
+            UpdateInfoTextBlock2(dice);
 
-                ResetDiceSlots();
-            }
-            else if (dice.SequenceEqual(new[] { 1, 2, 3 }))
-            {
-                if (currentMode == GameMode.UtanPengar)
-                {
-                    BankPoints++;
-                    InfoTextBlock1.Text = "1-2-3, Automatisk förlust för spelaren!";
-                    BankPointsTextBlock.Text = $"Poäng: {BankPoints}";
-                }
-                else
-                {
-                    await SettleMoneyRound(winnerIsBank: true);
-                    InfoTextBlock1.Text = "1-2-3, Banken vinner omgången!";
-                    BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
-                    PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
-                }
+            bool turnEnds = false; // whether the round ends immediately
 
-                ResetDiceSlots();
-            }
-            else if (dice[0] == dice[1] && dice[1] == dice[2]) // triple -> player wins
+            // Automatic outcomes: player wins immediately
+            if (dice.SequenceEqual(new[] { 4, 5, 6 }) ||
+                dice[0] == dice[1] && dice[1] == dice[2] ||
+                (dice[0] == dice[1] && dice[2] == 6) ||
+                (dice[1] == dice[2] && dice[0] == 6))
             {
                 if (currentMode == GameMode.UtanPengar)
                 {
@@ -539,31 +509,14 @@ namespace Cee_lo
                 {
                     await SettleMoneyRound(winnerIsBank: false);
                     InfoTextBlock1.Text = $"{diceText}, Spelaren vinner omgången!";
-                    BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
-                    PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
-
-                ResetDiceSlots();
+                turnEnds = true;
             }
-            else if ((dice[0] == dice[1] && dice[2] == 6) || (dice[1] == dice[2] && dice[0] == 6) || (dice[0] == dice[2] && dice[1] == 6))
-            {
-                if (currentMode == GameMode.UtanPengar)
-                {
-                    PlayerPoints++;
-                    InfoTextBlock1.Text = $"{diceText}, Automatisk vinst för spelaren!";
-                    PlayerPointsTextBlock.Text = $"Poäng: {PlayerPoints}";
-                }
-                else
-                {
-                    await SettleMoneyRound(winnerIsBank: false);
-                    InfoTextBlock1.Text = $"{diceText}, Spelaren vinner omgången!";
-                    BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
-                    PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
-                }
-
-                ResetDiceSlots();
-            }
-            else if ((dice[0] == dice[1] && dice[2] == 1) || (dice[1] == dice[2] && dice[0] == 1) || (dice[0] == dice[2] && dice[1] == 1))
+            // Automatic loss
+            else if (dice.SequenceEqual(new[] { 1, 2, 3 }) ||
+                     (dice[0] == dice[1] && dice[2] == 1) ||
+                     (dice[1] == dice[2] && dice[0] == 1) ||
+                     (dice[0] == dice[2] && dice[1] == 1))
             {
                 if (currentMode == GameMode.UtanPengar)
                 {
@@ -575,21 +528,24 @@ namespace Cee_lo
                 {
                     await SettleMoneyRound(winnerIsBank: true);
                     InfoTextBlock1.Text = $"{diceText}, Banken vinner omgången!";
-                    BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
-                    PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                 }
-
-                ResetDiceSlots();
+                turnEnds = true;
             }
+            // Player rolled a pair+kicker
             else if (HasPairWithKicker(dice, out int pairValue, out int kicker) && kicker >= 2 && kicker <= 5)
             {
                 if (currentMode == GameMode.UtanPengar)
                 {
                     PlayerStakeTextBlock.Visibility = Visibility.Visible;
-                    PlayerStakeTextBlock.Text = $"Spelarens nummer: {kicker}";
+                    PlayerStakeTextBlock.Text = $"Spelare 1:s nummer: {kicker}";
+                }
+                else
+                {
+                    PlayerStakeTextBlock.Visibility = Visibility.Visible;
+                    PlayerStakeTextBlock.Text = $"Spelare Insats: {kicker}";
                 }
 
-                // Player pair + kicker
+                // If bank already rolled and has pair+kicker
                 if (bankPairValue.HasValue)
                 {
                     if (kicker > bankPairValue.Value)
@@ -605,6 +561,7 @@ namespace Cee_lo
                             await SettleMoneyRound(winnerIsBank: false);
                             InfoTextBlock1.Text = $"{diceText}, Spelaren vinner omgången!";
                         }
+                        turnEnds = true;
                     }
                     else if (kicker < bankPairValue.Value)
                     {
@@ -619,12 +576,11 @@ namespace Cee_lo
                             await SettleMoneyRound(winnerIsBank: true);
                             InfoTextBlock1.Text = $"{diceText}, Banken vinner omgången!";
                         }
+                        turnEnds = true;
                     }
                     else
                     {
                         InfoTextBlock1.Text = $"{diceText}, Oavgjort!";
-                        // On tie, no credit transfer — both keep their reserved stakes.
-                        // After tie, release stakes back (return their reserved stake) to each side:
                         if (currentMode != GameMode.UtanPengar)
                         {
                             BankPoints += bankStake;
@@ -632,51 +588,45 @@ namespace Cee_lo
                             BankPointsTextBlock.Text = $"Krediter: {BankPoints}";
                             PlayerPointsTextBlock.Text = $"Krediter: {PlayerPoints}";
                         }
+                        turnEnds = true;
                     }
                 }
                 else
                 {
-                    // If bank wasn't waiting, treat as normal (no special)
-                    InfoTextBlock1.Text = $"{diceText}, Spelaren får rulla om...";
+                    // Player rolled first: bank now rolls automatically
+                    InfoTextBlock1.Text = $"{diceText}, Banken rullar nu...";
                     InfoTextBlock1.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    DieButton.Opacity = 1;
-                    DieButton.IsHitTestVisible = true;
-                    return;
+
+                    DieButton.IsHitTestVisible = false;
+                    DieButton.Opacity = 0.5;
+
+                    await Task.Delay(2000); // small delay so player can read number
+                    await BankRollAsync();   // **trigger bank roll for the same round**
+                    return; // do not continue further
                 }
             }
             else
             {
-                // three distinct non-456/non-123 -> player rerolls
+                // Invalid roll -> player rerolls
                 InfoTextBlock1.Text = $"{diceText}, Spelaren får rulla om...";
-                InfoTextBlock1.Visibility = Visibility.Visible;
-                await Task.Delay(2000);
-                DieButton.Opacity = 1;
                 DieButton.IsHitTestVisible = true;
+                DieButton.Opacity = 1;
                 return;
             }
 
+            // If round ended immediately (automatic win/loss or resolved pair+kicker)
             InfoTextBlock1.Visibility = Visibility.Visible;
-            // show "Nästa runda..." and allow time to read before starting next bank turn
-            await Task.Delay(3000);
-            InfoTextBlock1.Text = "Nästa runda...";
-            InfoTextBlock1.Visibility = Visibility.Visible;
-            await Task.Delay(3000);
-
-            // After round resolution, check for end conditions (money modes)
-            if (currentMode != GameMode.UtanPengar)
-            {
-                if (BankPoints <= 0 || PlayerPoints <= 0)
-                {
-                    await HandleEndOfGameByCredits();
-                    return;
-                }
-            }
-
-            // Start next bank turn
-            await Task.Delay(3000);
             ResetDiceSlots();
-            await BankRollAsync();
+
+            if (turnEnds)
+            {
+                await Task.Delay(3000);
+                InfoTextBlock1.Text = "Nästa runda...";
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+
+                await BankRollAsync(); // start next round
+            }
         }
 
         private void SetChipButtonsEnabled(bool enabled)
