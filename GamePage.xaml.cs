@@ -38,6 +38,8 @@ namespace Cee_lo
         // chip values
         private readonly int[] chipValues = new[] { 5, 25, 50, 100 };
 
+        private bool bankStartsNextRound = true; // true = bank-first (default), false = player-first
+
         public GamePage()
         {
             this.InitializeComponent();
@@ -534,28 +536,34 @@ namespace Cee_lo
         {
             await Task.Delay(3000);
 
-            // After automatic wins/losses show Player's turn (or end if credits depleted)
-            if (currentMode == GameMode.UtanPengar)
+            // Alternate who starts next round
+            bankStartsNextRound = !bankStartsNextRound;
+
+            if (bankStartsNextRound)
             {
-                InfoTextBlock1.Text = "Spelare 1:s tur att rulla!";
-                DieButton.Opacity = 1;
-                DieButton.IsHitTestVisible = true;
+                InfoTextBlock1.Text = "Banken börjar nästa runda!";
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                await Task.Delay(2000);
+                await BankRollAsync();
             }
             else
             {
-                // If game ended by credits
-                if (BankPoints <= 0 || PlayerPoints <= 0)
-                {
-                    await HandleEndOfGameByCredits();
-                    return;
-                }
-
-                InfoTextBlock1.Text = "Spelare 1:s tur att rulla! Välj insats.";
+                InfoTextBlock1.Text = "Spelare 1:s tur att börja!";
                 InfoTextBlock1.Visibility = Visibility.Visible;
-                // enable chips but only valid ones
-                SetChipButtonsEnabled(true);
+                await Task.Delay(2000);
+
+                if (currentMode == GameMode.UtanPengar)
+                {
+                    DieButton.Opacity = 1;
+                    DieButton.IsHitTestVisible = true;
+                }
+                else
+                {
+                    SetChipButtonsEnabled(true);
+                }
             }
         }
+
 
         private bool HasPairWithKicker(int[] dice, out int pairValue, out int kicker)
         {
@@ -609,7 +617,6 @@ namespace Cee_lo
 
                 turnEnds = true;
             }
-
             // --- AUTOMATIC LOSS CONDITIONS ---
             else if (dice.SequenceEqual(new[] { 1, 2, 3 }) ||
                      (dice[0] == dice[1] && dice[2] == 1) ||
@@ -630,7 +637,6 @@ namespace Cee_lo
 
                 turnEnds = true;
             }
-
             // --- VALID PAIR + KICKER ---
             else if (HasPairWithKicker(dice, out int pairValue, out int kicker) && kicker >= 2 && kicker <= 5)
             {
@@ -641,9 +647,9 @@ namespace Cee_lo
                 else
                     PlayerStakeTextBlock.Text = $"Spelare Insats: {kicker}";
 
-                // If the bank already rolled first this round
                 if (bankPairValue.HasValue)
                 {
+                    // Bank already rolled: compare immediately
                     int bankKicker = bankPairValue.Value;
 
                     if (kicker > bankKicker)
@@ -686,11 +692,13 @@ namespace Cee_lo
                         }
                     }
 
+                    // Clear stored bankPairValue now that round resolved
+                    bankPairValue = null;
                     turnEnds = true;
                 }
                 else
                 {
-                    // Player rolled first: store value & let bank respond
+                    // Player-first round: store kicker and let bank respond
                     playerPairValue = kicker;
                     InfoTextBlock1.Text = $"{diceText}, Banken rullar nu...";
                     InfoTextBlock1.Visibility = Visibility.Visible;
@@ -703,7 +711,6 @@ namespace Cee_lo
                     return;
                 }
             }
-
             // --- INVALID ROLL ---
             else
             {
@@ -714,17 +721,18 @@ namespace Cee_lo
             }
 
             // --- ROUND END HANDLING ---
-            InfoTextBlock1.Visibility = Visibility.Visible;
-            ResetDiceSlots();
-
             if (turnEnds)
             {
+                InfoTextBlock1.Visibility = Visibility.Visible;
+                ResetDiceSlots();
+
                 await Task.Delay(3000);
                 InfoTextBlock1.Text = "Nästa runda...";
                 InfoTextBlock1.Visibility = Visibility.Visible;
                 await Task.Delay(3000);
 
-                await BankRollAsync(); // start next round
+                // Let EndBankTurnAsync handle who starts next round:
+                await EndBankTurnAsync();
             }
         }
 
