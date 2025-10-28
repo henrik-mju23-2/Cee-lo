@@ -194,6 +194,7 @@ namespace Cee_lo
 
             // Bank rolls
             int[] dice = RollDice();
+            Array.Sort(dice);
             UpdateDiceButtons(dice, BankDieSlot1, BankDieSlot2, BankDieSlot3);
             await EvaluateBankRollAsync(dice);
         }
@@ -395,6 +396,7 @@ namespace Cee_lo
             DieButton.IsHitTestVisible = false;
 
             int[] dice = RollDice();
+            Array.Sort(dice);
             UpdateDiceButtons(dice, DieSlot1, DieSlot2, DieSlot3);
             await EvaluatePlayerRollAsync(dice);
 

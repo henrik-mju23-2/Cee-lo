@@ -19,7 +19,7 @@
                 <CompositeTransform TranslateX="2"/>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button x:Name="StartButton" Content="Start" Margin="0,516,0,0" VerticalAlignment="Top" Background="#FF0062FF" Width="175" Height="75" FontSize="48" CornerRadius="15,15,15,15" BorderThickness="1,1,1,1" Click="StartButton_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Center"/>
+        <Button x:Name="StartButton" Content="Start" Margin="0,516,0,0" VerticalAlignment="Top" Background="#FF0062FF" Width="175" Height="75" FontSize="48" CornerRadius="15,15,15,15" BorderThickness="0,0,0,1" Click="StartButton_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Center"/>
         <Button x:Name="ExitButton" Margin="1202,27,0,0" VerticalAlignment="Top" Width="50" Height="50" Style="{StaticResource AccentButtonStyle}" Click="ExitButton_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/ExitButton.png"/>
