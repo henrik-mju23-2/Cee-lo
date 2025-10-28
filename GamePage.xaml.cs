@@ -347,7 +347,7 @@ namespace Cee_lo
             // else: three different numbers (not 4-5-6 or 1-2-3) => bank rerolls
             InfoTextBlock1.Text = $"{diceText}, Banken får rulla om...";
             InfoTextBlock1.Visibility = Visibility.Visible;
-            await Task.Delay(2000);
+            await Task.Delay(6000);
             // reroll
             await BankRollAsync();
         }
@@ -578,6 +578,7 @@ namespace Cee_lo
             }
 
             // Start next bank turn
+            await Task.Delay(3000);
             await BankRollAsync();
         }
 
