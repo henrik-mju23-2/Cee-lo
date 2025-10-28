@@ -155,8 +155,19 @@ namespace Cee_lo
             bankStake = 0;
             playerStake = 0;
             bankPairValue = null;
-            BankStakeTextBlock.Text = currentMode == GameMode.UtanPengar ? "" : "Bank Insats: -";
-            PlayerStakeTextBlock.Text = currentMode == GameMode.UtanPengar ? "" : "Spelare Insats: -";
+
+            if (currentMode == GameMode.UtanPengar)
+            {
+                BankStakeTextBlock.Visibility = Visibility.Visible;
+                PlayerStakeTextBlock.Visibility = Visibility.Visible;
+                BankStakeTextBlock.Text = "";
+                PlayerStakeTextBlock.Text = "";
+            }
+            else
+            {
+                BankStakeTextBlock.Text = "Bank Insats: -";
+                PlayerStakeTextBlock.Text = "Spelare Insats: -";
+            }
 
             // If money modes, bank chooses a stake (random) but limited so it never causes player negative credits
             if (currentMode != GameMode.UtanPengar)
@@ -307,6 +318,12 @@ namespace Cee_lo
             if (HasPairWithKicker(dice, out int pairVal, out int kicker) && kicker >= 2 && kicker <= 5)
             {
                 bankPairValue = kicker;
+
+                if (currentMode == GameMode.UtanPengar)
+                {
+                    BankStakeTextBlock.Visibility = Visibility.Visible;
+                    BankStakeTextBlock.Text = $"Bankens nummer: {bankPairValue}";
+                }
 
                 InfoTextBlock1.Text = "Spelare 1:s tur att rulla!";
                 InfoTextBlock1.Visibility = Visibility.Visible;
@@ -474,6 +491,12 @@ namespace Cee_lo
             }
             else if (HasPairWithKicker(dice, out int pairValue, out int kicker) && kicker >= 2 && kicker <= 5)
             {
+                if (currentMode == GameMode.UtanPengar)
+                {
+                    PlayerStakeTextBlock.Visibility = Visibility.Visible;
+                    PlayerStakeTextBlock.Text = $"Spelarens nummer: {kicker}";
+                }
+
                 // Player pair + kicker
                 if (bankPairValue.HasValue)
                 {
