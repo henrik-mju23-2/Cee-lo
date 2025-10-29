@@ -146,22 +146,22 @@
                 <ImageBrush ImageSource="/Assets/DieSlot.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="CasinoChip5Button" Margin="48,576,0,0" VerticalAlignment="Top" Height="130" Width="130" Click="CasinoChip5Button_Click">
+        <Button x:Name="CasinoChip5Button" Margin="48,576,0,0" VerticalAlignment="Top" Height="130" Width="130" Click="CasinoChip5Button_Click" d:IsHidden="True">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/CasinoChip5.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="CasinoChip25Button" Margin="48,414,0,0" VerticalAlignment="Top" Width="130" Height="130" Click="CasinoChip25Button_Click">
+        <Button x:Name="CasinoChip25Button" Margin="48,414,0,0" VerticalAlignment="Top" Width="130" Height="130" Click="CasinoChip25Button_Click" d:IsHidden="True">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/CasinoChip25.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="CasinoChip50Button" Margin="48,249,0,0" VerticalAlignment="Top" Width="130" Height="130" Click="CasinoChip50Button_Click">
+        <Button x:Name="CasinoChip50Button" Margin="48,249,0,0" VerticalAlignment="Top" Width="130" Height="130" Click="CasinoChip50Button_Click" d:IsHidden="True">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/CasinoChip50.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="CasinoChip100Button" Margin="48,97,0,0" VerticalAlignment="Top" Width="130" Height="130" Click="CasinoChip100Button_Click">
+        <Button x:Name="CasinoChip100Button" Margin="48,97,0,0" VerticalAlignment="Top" Width="130" Height="130" Click="CasinoChip100Button_Click" d:IsHidden="True">
             <Button.Background>
                 <ImageBrush ImageSource="/Assets/CasinoChip100.png"/>
             </Button.Background>

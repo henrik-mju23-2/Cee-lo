@@ -25,7 +25,7 @@
                 </Grid>
             </StackPanel>
         </Popup>
-        <Button x:Name="MedBankButton" Content="Med Bank" Margin="0,535,0,0" VerticalAlignment="Top" Click="MedBankButton_Click" Width="175" Height="75" HorizontalAlignment="Center" FontSize="30" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Background="#FF00EE13" Style="{StaticResource AccentButtonStyle}"/>
-        <Button x:Name="UtanBankButton" Content="Utan Bank" Margin="848,535,0,0" VerticalAlignment="Top" Click="UtanBankButton_Click" Width="175" Height="75" BorderThickness="1,1,1,1" FontSize="30" Background="#FF0062FF" CornerRadius="15,15,15,15" Style="{StaticResource AccentButtonStyle}"/>
+        <Button x:Name="MedBankButton" Content="Med Bank" Margin="0,535,0,0" VerticalAlignment="Top" Click="MedBankButton_Click" Width="175" Height="75" HorizontalAlignment="Center" FontSize="30" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Background="#FF00EE13" Style="{StaticResource AccentButtonStyle}" IsEnabled="False"/>
+        <Button x:Name="UtanBankButton" Content="Utan Bank" Margin="848,535,0,0" VerticalAlignment="Top" Click="UtanBankButton_Click" Width="175" Height="75" BorderThickness="1,1,1,1" FontSize="30" Background="#FF0062FF" CornerRadius="15,15,15,15" Style="{StaticResource AccentButtonStyle}" IsEnabled="False"/>
     </Grid>
 </Page>
