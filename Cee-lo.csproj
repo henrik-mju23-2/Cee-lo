@@ -119,6 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cee-loGame\DiceEvaluator.cs" />
+    <Compile Include="Cee-loGame\DiceRoller.cs" />
+    <Compile Include="Cee-loGame\GameState.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
