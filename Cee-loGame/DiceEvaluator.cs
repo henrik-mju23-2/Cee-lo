@@ -8,13 +8,11 @@ namespace Cee_lo.Cee_loGame
 {
     public class DiceEvaluator
     {
-        /// <summary>
-        /// Checks if the dice contain a pair and a kicker (the remaining die).
-        /// </summary>
-        /// <param name="dice">Array of three dice values</param>
-        /// <param name="pairValue">Outputs the value of the pair if found</param>
-        /// <param name="kicker">Outputs the remaining die (kicker) if pair is found</param>
-        /// <returns>True if a pair exists, false otherwise</returns>
+        // Checks if the dice contain a pair and a kicker (the remaining die).
+        // <param name="dice">Array of three dice values</param>
+        // <param name="pairValue">Outputs the value of the pair if found</param>
+        // <param name="kicker">Outputs the remaining die (kicker) if pair is found</param>
+        // <returns>True if a pair exists, false otherwise</returns>
         public static bool HasPairWithKicker(int[] dice, out int pairValue, out int kicker)
         {
             pairValue = 0;
@@ -33,12 +31,10 @@ namespace Cee_lo.Cee_loGame
             return false;
         }
 
-        /// <summary>
-        /// Determines if a dice roll is an automatic win.
-        /// Automatic wins are 4-5-6 or any triples, or a pair plus a 6.
-        /// </summary>
-        /// <param name="dice">Array of three dice values</param>
-        /// <returns>True if roll is automatic win, false otherwise</returns>
+        // Determines if a dice roll is an automatic win.
+        // Automatic wins are 4-5-6 or any triples, or a pair plus a 6.
+        // <param name="dice">Array of three dice values</param>
+        // <returns>True if roll is automatic win, false otherwise</returns>
         public static bool IsAutomaticWin(int[] dice)
         {
             Array.Sort(dice);
@@ -50,12 +46,10 @@ namespace Cee_lo.Cee_loGame
                    (dice[0] == dice[2] && dice[1] == 6);            // Pair + 6
         }
 
-        /// <summary>
-        /// Determines if a dice roll is an automatic loss.
-        /// Automatic losses are 1-2-3 or a pair plus a 1.
-        /// </summary>
-        /// <param name="dice">Array of three dice values</param>
-        /// <returns>True if roll is automatic loss, false otherwise</returns>
+        // Determines if a dice roll is an automatic loss.
+        // Automatic losses are 1-2-3 or a pair plus a 1.
+        // <param name="dice">Array of three dice values</param>
+        // <returns>True if roll is automatic loss, false otherwise</returns>
         public static bool IsAutomaticLoss(int[] dice)
         {
             Array.Sort(dice);
@@ -66,12 +60,10 @@ namespace Cee_lo.Cee_loGame
                    (dice[0] == dice[2] && dice[1] == 1);            // Pair + 1
         }
 
-        /// <summary>
-        /// Generates a human-readable string describing the result of a dice roll.
-        /// Includes information on automatic wins/losses or pair + kicker scenarios.
-        /// </summary>
-        /// <param name="dice">Array of three dice values</param>
-        /// <returns>A descriptive string for UI display</returns>
+        // Generates a human-readable string describing the result of a dice roll.
+        // Includes information on automatic wins/losses or pair + kicker scenarios.
+        // <param name="dice">Array of three dice values</param>
+        // <returns>A descriptive string for UI display</returns>
         public static string GetDiceInfoText(int[] dice)
         {
             Array.Sort(dice); // Sort dice for consistency in display

@@ -80,9 +80,7 @@ namespace Cee_lo
             await BankRollAsync(); // start the bank's turn
         }
 
-        /// <summary>
-        /// Handles the bank's dice roll, including optional response to player.
-        /// </summary>
+        // Handles the bank's dice roll, including optional response to player.
         private async Task BankRollAsync(bool isResponseToPlayer = false)
         {
             // Reset all dice slots to default images
@@ -103,10 +101,8 @@ namespace Cee_lo
             await EvaluateBankRollAsync(dice);
         }
 
-        /// <summary>
-        /// Evaluates the result of the bank's roll and updates points, UI, and game state.
-        /// Handles automatic wins/losses, pair+kicker, and rerolls.
-        /// </summary>
+        // Evaluates the result of the bank's roll and updates points, UI, and game state.
+        // Handles automatic wins/losses, pair+kicker, and rerolls.
         private async Task EvaluateBankRollAsync(int[] dice)
         {
             Array.Sort(dice);
@@ -205,9 +201,7 @@ namespace Cee_lo
             }
         }
 
-        /// <summary>
-        /// Ends the bank's turn and decides which player starts the next round.
-        /// </summary>
+        // Ends the bank's turn and decides which player starts the next round.
         private async Task EndBankTurnAsync()
         {
             await Task.Delay(3000);
@@ -234,10 +228,8 @@ namespace Cee_lo
             }
         }
 
-        /// <summary>
-        /// Handles player dice button click.
-        /// Rolls dice and evaluates result.
-        /// </summary>
+        // Handles player dice button click.
+        // Rolls dice and evaluates result.
         private async void DieButton_Click(object sender, RoutedEventArgs e)
         {
             // Disable button to prevent double click
@@ -258,9 +250,7 @@ namespace Cee_lo
             Trace.WriteLine($"PlayerPoints: {gameState.PlayerPoints}");
         }
 
-        /// <summary>
-        /// Evaluates the player's roll, updates points, handles pair+kicker comparisons and rerolls.
-        /// </summary>
+        // Evaluates the player's roll, updates points, handles pair+kicker comparisons and rerolls.
         private async Task EvaluatePlayerRollAsync(int[] dice)
         {
             Array.Sort(dice);
