@@ -134,7 +134,9 @@ namespace Cee_lo
         private async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             await Task.Delay(3000);
-            InfoTextBlock1.Text = "Banken rullar tärningarna...";
+
+            // Changed message
+            InfoTextBlock1.Text = "Banken rullar först";
             InfoTextBlock1.Visibility = Visibility.Visible;
             await Task.Delay(3000);
             InfoTextBlock1.Visibility = Visibility.Collapsed;
@@ -206,7 +208,7 @@ namespace Cee_lo
             // Show rolling indicator
             InfoTextBlock1.Text = isResponseToPlayer ? "Banken rullar som svar..." : "Banken rullar nu...";
             InfoTextBlock1.Visibility = Visibility.Visible;
-            await Task.Delay(3000);
+            await Task.Delay(3000); // <-- ensures the message lasts 3 seconds
             InfoTextBlock1.Visibility = Visibility.Collapsed;
 
             // Bank chooses a stake if in money mode (not UtanPengar)
@@ -229,12 +231,6 @@ namespace Cee_lo
                 await Task.Delay(3000);
                 InfoTextBlock1.Visibility = Visibility.Collapsed;
             }
-
-            // Bank rolls dice
-            InfoTextBlock1.Text = "Banken rullar tärningarna...";
-            InfoTextBlock1.Visibility = Visibility.Visible;
-            await Task.Delay(3000);
-            InfoTextBlock1.Visibility = Visibility.Collapsed;
 
             int[] dice = RollDice();
             Array.Sort(dice);
