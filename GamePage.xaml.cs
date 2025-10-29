@@ -766,7 +766,13 @@ namespace Cee_lo
             // Pair + kicker 2..5
             else if (HasPairWithKicker(dice, out int pairVal, out int kicker) && kicker >= 2 && kicker <= 5)
             {
-                info2 = $"{diceText}, slå en {pairVal + 1}-a eller högre för att vinna";
+                // The player must roll one higher than the kicker to beat it
+                int target = kicker + 1;
+
+                // Clamp target to maximum 6
+                if (target > 6) target = 6;
+
+                info2 = $"{diceText}, slå en {target}:a eller högre för att vinna";
             }
             // All other rolls
             else
