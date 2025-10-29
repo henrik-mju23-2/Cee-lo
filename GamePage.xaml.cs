@@ -379,6 +379,7 @@ namespace Cee_lo
 
         private void EndButton_Click(object sender, RoutedEventArgs e)
         {
+            // Navigate to ResultPage with only bank and player points
             Frame.Navigate(typeof(ResultPage), new object[] { BankPoints, PlayerPoints });
         }
 
