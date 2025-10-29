@@ -13,26 +13,33 @@ namespace Cee_lo
 {
     public sealed partial class GamePage : Page
     {
+        // DiceRoller handles dice generation, updating dice images, and resetting dice slots.
         private DiceRoller diceRoller = new DiceRoller();
+
+        // GameState holds points, pair/kicker values, and round start order.
         private GameState gameState = new GameState();
 
         public GamePage()
         {
             this.InitializeComponent();
 
+            // Initial UI setup: hide blur overlay, info text, disable dice button
             BlurRectangle.Visibility = Visibility.Collapsed;
             InfoTextBlock1.Visibility = Visibility.Collapsed;
             DieButton.Opacity = 0.5;
             DieButton.IsHitTestVisible = false;
 
+            // Disable player's dice slots to prevent clicking before roll
             DieSlot1.IsHitTestVisible = false;
             DieSlot2.IsHitTestVisible = false;
             DieSlot3.IsHitTestVisible = false;
 
+            // Disable bank's dice slots (clicking is not needed)
             BankDieSlot1.IsHitTestVisible = false;
             BankDieSlot2.IsHitTestVisible = false;
             BankDieSlot3.IsHitTestVisible = false;
 
+            // When page is loaded, trigger the initial game sequence
             this.Loaded += GamePage_Loaded;
         }
 
@@ -40,7 +47,7 @@ namespace Cee_lo
         {
             base.OnNavigatedTo(e);
 
-            // Hide casino chips
+            // Hide all casino chip buttons (not used in current game mode)
             CasinoChip5Button.Visibility = Visibility.Collapsed;
             CasinoChip25Button.Visibility = Visibility.Collapsed;
             CasinoChip50Button.Visibility = Visibility.Collapsed;
@@ -51,49 +58,66 @@ namespace Cee_lo
             CasinoChip50Button.IsHitTestVisible = false;
             CasinoChip100Button.IsHitTestVisible = false;
 
+            // Hide bank and player stake text blocks
             BankStakeTextBlock.Visibility = Visibility.Collapsed;
             PlayerStakeTextBlock.Visibility = Visibility.Collapsed;
 
+            // Initialize score display with current points from GameState
             BankPointsTextBlock.Text = $"Poäng: {gameState.BankPoints}";
             PlayerPointsTextBlock.Text = $"Poäng: {gameState.PlayerPoints}";
         }
 
+        // Triggered after page is fully loaded
         private async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Delay(3000);
+            await Task.Delay(3000); // initial delay before first roll
 
-            InfoTextBlock1.Text = "Banken rullar först";
+            InfoTextBlock1.Text = "Banken rullar först"; // display initial info
             InfoTextBlock1.Visibility = Visibility.Visible;
-            await Task.Delay(3000);
+            await Task.Delay(3000); // show message for 3 seconds
             InfoTextBlock1.Visibility = Visibility.Collapsed;
 
-            await BankRollAsync();
+            await BankRollAsync(); // start the bank's turn
         }
 
+        /// <summary>
+        /// Handles the bank's dice roll, including optional response to player.
+        /// </summary>
         private async Task BankRollAsync(bool isResponseToPlayer = false)
         {
+            // Reset all dice slots to default images
             diceRoller.ResetDiceSlots(DieSlot1, DieSlot2, DieSlot3, BankDieSlot1, BankDieSlot2, BankDieSlot3);
 
+            // Show appropriate info depending on whether bank is responding
             InfoTextBlock1.Text = isResponseToPlayer ? "Banken rullar som svar..." : "Banken rullar nu...";
             InfoTextBlock1.Visibility = Visibility.Visible;
             await Task.Delay(3000);
             InfoTextBlock1.Visibility = Visibility.Collapsed;
 
+            // Roll and sort dice, then update bank's dice images
             int[] dice = diceRoller.RollDice();
             Array.Sort(dice);
             diceRoller.UpdateDiceButtons(dice, BankDieSlot1, BankDieSlot2, BankDieSlot3);
 
+            // Evaluate the outcome of the bank's roll
             await EvaluateBankRollAsync(dice);
         }
 
+        /// <summary>
+        /// Evaluates the result of the bank's roll and updates points, UI, and game state.
+        /// Handles automatic wins/losses, pair+kicker, and rerolls.
+        /// </summary>
         private async Task EvaluateBankRollAsync(int[] dice)
         {
             Array.Sort(dice);
             string diceText = string.Join("-", dice);
+
+            // Update secondary info text with detailed dice info
             InfoTextBlock2.Text = DiceEvaluator.GetDiceInfoText(dice);
 
-            bool roundEnds = false;
+            bool roundEnds = false; // flag for ending the round
 
+            // --- Automatic wins ---
             if (DiceEvaluator.IsAutomaticWin(dice))
             {
                 gameState.BankPoints++;
@@ -101,6 +125,7 @@ namespace Cee_lo
                 BankPointsTextBlock.Text = $"Poäng: {gameState.BankPoints}";
                 roundEnds = true;
             }
+            // --- Automatic losses ---
             else if (DiceEvaluator.IsAutomaticLoss(dice))
             {
                 gameState.PlayerPoints++;
@@ -108,21 +133,25 @@ namespace Cee_lo
                 PlayerPointsTextBlock.Text = $"Poäng: {gameState.PlayerPoints}";
                 roundEnds = true;
             }
+            // --- Pair + kicker rolls ---
             else if (DiceEvaluator.HasPairWithKicker(dice, out int pairVal, out int kicker) && kicker >= 2 && kicker <= 5)
             {
-                if (!gameState.PlayerPairValue.HasValue)
+                if (!gameState.PlayerPairValue.HasValue) // if player hasn't rolled pair yet
                 {
+                    // Bank sets its kicker value and informs player to roll
                     gameState.BankPairValue = kicker;
                     BankStakeTextBlock.Text = $"Bankens nummer: {gameState.BankPairValue}";
                     InfoTextBlock1.Text = "Spelare 1:s tur att rulla!";
                     InfoTextBlock1.Visibility = Visibility.Visible;
 
+                    // Enable player's dice button
                     DieButton.Opacity = 1;
                     DieButton.IsHitTestVisible = true;
-                    return;
+                    return; // wait for player's roll
                 }
                 else
                 {
+                    // Compare player's kicker vs bank's kicker
                     int playerKicker = gameState.PlayerPairValue.Value;
                     int bankKicker = kicker;
 
@@ -143,11 +172,13 @@ namespace Cee_lo
                         InfoTextBlock1.Text = $"{diceText}, Oavgjort!";
                     }
 
+                    // Reset pair values after round ends
                     gameState.PlayerPairValue = null;
                     gameState.BankPairValue = null;
                     roundEnds = true;
                 }
             }
+            // --- Invalid roll, reroll ---
             else
             {
                 InfoTextBlock1.Text = $"{diceText}, Banken får rulla om...";
@@ -159,6 +190,7 @@ namespace Cee_lo
                 return;
             }
 
+            // Handle round end: reset dice and prepare next round
             if (roundEnds)
             {
                 diceRoller.ResetDiceSlots(DieSlot1, DieSlot2, DieSlot3, BankDieSlot1, BankDieSlot2, BankDieSlot3);
@@ -173,10 +205,14 @@ namespace Cee_lo
             }
         }
 
+        /// <summary>
+        /// Ends the bank's turn and decides which player starts the next round.
+        /// </summary>
         private async Task EndBankTurnAsync()
         {
             await Task.Delay(3000);
 
+            // Toggle who starts next round
             gameState.BankStartsNextRound = !gameState.BankStartsNextRound;
 
             if (gameState.BankStartsNextRound)
@@ -184,7 +220,7 @@ namespace Cee_lo
                 InfoTextBlock1.Text = "Banken börjar nästa runda!";
                 InfoTextBlock1.Visibility = Visibility.Visible;
                 await Task.Delay(2000);
-                await BankRollAsync();
+                await BankRollAsync(); // bank rolls first
             }
             else
             {
@@ -192,25 +228,39 @@ namespace Cee_lo
                 InfoTextBlock1.Visibility = Visibility.Visible;
                 await Task.Delay(2000);
 
+                // Enable player's dice button
                 DieButton.Opacity = 1;
                 DieButton.IsHitTestVisible = true;
             }
         }
 
+        /// <summary>
+        /// Handles player dice button click.
+        /// Rolls dice and evaluates result.
+        /// </summary>
         private async void DieButton_Click(object sender, RoutedEventArgs e)
         {
+            // Disable button to prevent double click
             DieButton.Opacity = 0.5;
             DieButton.IsHitTestVisible = false;
 
             int[] dice = diceRoller.RollDice();
             Array.Sort(dice);
+
+            // Update player's dice images
             diceRoller.UpdateDiceButtons(dice, DieSlot1, DieSlot2, DieSlot3);
+
+            // Evaluate result of player's roll
             await EvaluatePlayerRollAsync(dice);
 
+            // Debug logging
             Trace.WriteLine($"BankPoints: {gameState.BankPoints}");
             Trace.WriteLine($"PlayerPoints: {gameState.PlayerPoints}");
         }
 
+        /// <summary>
+        /// Evaluates the player's roll, updates points, handles pair+kicker comparisons and rerolls.
+        /// </summary>
         private async Task EvaluatePlayerRollAsync(int[] dice)
         {
             Array.Sort(dice);
@@ -219,6 +269,7 @@ namespace Cee_lo
 
             bool roundEnds = false;
 
+            // Automatic win
             if (DiceEvaluator.IsAutomaticWin(dice))
             {
                 gameState.PlayerPoints++;
@@ -226,6 +277,7 @@ namespace Cee_lo
                 PlayerPointsTextBlock.Text = $"Poäng: {gameState.PlayerPoints}";
                 roundEnds = true;
             }
+            // Automatic loss
             else if (DiceEvaluator.IsAutomaticLoss(dice))
             {
                 gameState.BankPoints++;
@@ -233,6 +285,7 @@ namespace Cee_lo
                 BankPointsTextBlock.Text = $"Poäng: {gameState.BankPoints}";
                 roundEnds = true;
             }
+            // Pair + kicker
             else if (DiceEvaluator.HasPairWithKicker(dice, out int pairVal, out int kicker) && kicker >= 2 && kicker <= 5)
             {
                 PlayerStakeTextBlock.Visibility = Visibility.Visible;
@@ -264,6 +317,7 @@ namespace Cee_lo
                 }
                 else
                 {
+                    // Player rolls first, bank responds next
                     gameState.PlayerPairValue = kicker;
                     InfoTextBlock1.Text = $"{diceText}, Banken rullar nu...";
                     InfoTextBlock1.Visibility = Visibility.Visible;
@@ -276,6 +330,7 @@ namespace Cee_lo
                     return;
                 }
             }
+            // Invalid roll: allow reroll
             else
             {
                 InfoTextBlock1.Text = $"{diceText}, Spelaren får rulla om...";
@@ -286,6 +341,7 @@ namespace Cee_lo
 
             if (roundEnds)
             {
+                // Reset dice and start next round
                 diceRoller.ResetDiceSlots(DieSlot1, DieSlot2, DieSlot3, BankDieSlot1, BankDieSlot2, BankDieSlot3);
                 InfoTextBlock1.Visibility = Visibility.Visible;
                 await Task.Delay(3000);
@@ -298,6 +354,7 @@ namespace Cee_lo
             }
         }
 
+        // --- Info popup handlers ---
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
             InformationPopUp.IsOpen = true;
@@ -310,12 +367,13 @@ namespace Cee_lo
             BlurRectangle.Visibility = Visibility.Collapsed;
         }
 
+        // Navigate to ResultPage passing bank/player points
         private void EndButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(ResultPage), new object[] { gameState.BankPoints, gameState.PlayerPoints });
         }
 
-        // Empty handlers preserved
+        // --- Empty event handlers preserved for XAML wiring ---
         private void BankDieSlot1_Click(object sender, RoutedEventArgs e) { }
         private void BankDieSlot2_Click(object sender, RoutedEventArgs e) { }
         private void BankDieSlot3_Click(object sender, RoutedEventArgs e) { }
